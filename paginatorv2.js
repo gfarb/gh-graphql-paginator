@@ -1,6 +1,6 @@
 import _ from "lodash";
 import { graphql } from "@octokit/graphql";
-import { queryResponse, initQuery } from './queryResponse.js'
+import { initQuery } from './queryResponse.js'
 
 const graphqlWithAuth = graphql.defaults({
     headers: {
@@ -15,6 +15,7 @@ class QueryDataWrapper {
         this.hasNextPage = true;
         this.endCursor = undefined;
         this.paginatedObjPath = undefined;
+        this.totalCountForObjToPaginate = undefined;
         this.findObjectToPaginate(this.results);
     }
 
@@ -46,6 +47,7 @@ class QueryDataWrapper {
             this.hasNextPage = objToParse.pageInfo.hasNextPage;
             this.endCursor = objToParse.pageInfo.endCursor;
             this.paginatedObjPath = parsedObjList;
+            this.totalCountForObjToPaginate = objToParse.totalCount;
             return this;
         }
     
@@ -70,5 +72,8 @@ class QueryDataWrapper {
     console.log(dataWrapper.paginatedObjPath);
     console.log(dataWrapper.hasNextPage);
     console.log(dataWrapper.endCursor);
-    QueryDataWrapper.paginate(dataWrapper);
+    await QueryDataWrapper.paginate(dataWrapper);
+    console.log(dataWrapper.totalCountForObjToPaginate);
+    console.log(_.get(dataWrapper.results, dataWrapper.paginatedObjPath).nodes.length);
+    // console.log(JSON.stringify(dataWrapper.results));
 })();
