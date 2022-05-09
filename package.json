@@ -1,9 +1,8 @@
 {
   "name": "gh-graphql-paginator",
   "version": "1.0.0",
-  "description": "",
   "main": "paginator.js",
-
+  "type": "module",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -16,5 +15,10 @@
   "bugs": {
     "url": "https://github.com/gfarb/gh-graphql-paginator/issues"
   },
-  "homepage": "https://github.com/gfarb/gh-graphql-paginator#readme"
+  "homepage": "https://github.com/gfarb/gh-graphql-paginator#readme",
+  "description": "",
+  "dependencies": {
+    "@octokit/graphql": "^4.8.0",
+    "lodash": "^4.17.21"
+  }
 }
