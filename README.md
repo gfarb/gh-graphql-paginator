@@ -49,22 +49,28 @@ _This query is fetching issue comments from Issue #3 in the `github/github` repo
 import { paginate } from 'gh-graphql-paginator'
 const query = `
   query ($endCursor: String) {
-  repository(name: "github", owner: "github") {
-    issue(number: 3) {
-      id
-      comments(first: 1, after: $endCursor) {
-        nodes {
-          id
-          body
-        }
-        totalCount
-        pageInfo {
-          hasNextPage
-          endCursor
+    repository(name: "github", owner: "github") {
+      issue(number: 3) {
+        id
+        comments(first: 1, after: $endCursor) {
+          nodes {
+            id
+            body
+          }
+          totalCount
+          pageInfo {
+            hasNextPage
+            endCursor
+          }
         }
       }
     }
   }
+`;
+
+async function paginateQuery() {
+  const results = await paginate(query);
+  console.log(JSON.stringify(results));
 }
 ```
 
