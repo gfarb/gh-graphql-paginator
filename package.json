@@ -1,7 +1,7 @@
 {
   "name": "gh-graphql-paginator",
   "version": "1.0.0",
-  "main": "paginator.js",
+  "main": "scripts/paginator.js",
   "type": "module",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
