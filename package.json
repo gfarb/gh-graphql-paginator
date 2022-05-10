@@ -1,0 +1,24 @@
+{
+  "name": "gh-graphql-paginator",
+  "version": "1.0.0",
+  "main": "scripts/paginator.js",
+  "type": "module",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/gfarb/gh-graphql-paginator.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/gfarb/gh-graphql-paginator/issues"
+  },
+  "homepage": "https://github.com/gfarb/gh-graphql-paginator#readme",
+  "description": "Simple GitHub GraphQL Paginator is a Node.js project that uses cursor-based pagination to paginate a GitHub GraphQL query Connection for single object.",
+  "dependencies": {
+    "@octokit/graphql": "^4.8.0",
+    "lodash": "^4.17.21"
+  }
+}
