@@ -2,7 +2,7 @@
 Simple GitHub GraphQL Paginator is a Node.js project that uses cursor-based pagination to paginate a GitHub GraphQL query Connection for single object.
   
 ## Installation
-Use the Node package manager [npm](https://www.npmjs.com/) to install Simple GitHub GraphQL Paginator.
+Use the Node package manager [npm](https://www.npmjs.com/package/gh-graphql-paginator) to install Simple GitHub GraphQL Paginator.
 
 ```bash
 npm install gh-graphql-paginator
