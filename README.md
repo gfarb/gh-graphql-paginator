@@ -14,7 +14,7 @@ npm install gh-graphql-paginator
 - The GraphQL query must include a variable called `endCursor` that is passed as the `after` argument value for the object which requires pagination. See the examples below.
 - Use Connections for the object you need to paginate, do not use Edges. See the examples below.
 - The Connection that requires pagination must also include `pageInfo` with `hasNextPage` and `endCursor` as well as `totalCount`. See the examples below.
-- The Connection that requires pagination must be a child of a single object. For example, this project cannot pagiante issues and subsequently paginate comments for every issue. This project can paginate all issues pertaining to a repository or all issue comments for an issue.
+- The Connection that requires pagination must be a child of a single object. For example, this project cannot paginate issues and subsequently paginate comments for every issue. This project can paginate all issues pertaining to a repository or all issue comments for an issue.
 
 #### Examples:
 _This query is fetching public repositories from the `GitHub` organization. The query will be paginated and all public repositories from the `GitHub` organization will be returned_.
