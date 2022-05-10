@@ -1,5 +1,5 @@
 # Simple GitHub GraphQL Paginator
-Simple GitHub GraphQL Paginator is a Node.js project that uses connections and cursor-based pagination to fetch all records of an applicable object from the GitHub GraphQL API
+Simple GitHub GraphQL Paginator is a Node.js project that uses cursor-based pagination to paginate a GitHub GraphQL query Connection for single object.
   
 ## Installation
 Use the Node package manager [npm](https://www.npmjs.com/) to install Simple GitHub GraphQL Paginator.
@@ -11,11 +11,12 @@ npm install gh-graphql-paginator
 ## Usage
 #### Required:
 - Set an environment variable called `GITHUB_TOKEN` that stores a valid GitHub PAT that will be used for GitHub GraphQL API authentication.
-- The GraphQL query must include a variable called `endCursor` that is passed as the `after` argument value for the object which requires pagination. See the example below.
-- Use Connections for the object you need to paginate, do not use Edges. See the example below.
-- The Connection that requires pagination must also include `pageInfo` with `hasNextPage` and `endCursor` as well as `totalCount`. See the example below.
+- The GraphQL query must include a variable called `endCursor` that is passed as the `after` argument value for the object which requires pagination. See the examples below.
+- Use Connections for the object you need to paginate, do not use Edges. See the examples below.
+- The Connection that requires pagination must also include `pageInfo` with `hasNextPage` and `endCursor` as well as `totalCount`. See the examples below.
+- The Connection that requires pagination must be a child of a single object. For example, this project cannot pagiante issues and subsequently paginate comments for every issue. This project can paginate all issues pertaining to a repository or all issue comments for an issue.
 
-#### Example:
+#### Examples:
 _This query is fetching public repositories from the `GitHub` organization. The query will be paginated and all public repositories from the `GitHub` organization will be returned_.
 ```javascript
 import { paginate } from 'gh-graphql-paginator'
@@ -40,6 +41,30 @@ const query = `
 async function paginateQuery() {
   const results = await paginate(query);
   console.log(JSON.stringify(results));
+}
+```
+
+_This query is fetching issue comments from Issue #3 in the `github/github` repo. The query will be paginated and all issue comments for the issue will be returned_.
+```javascript
+import { paginate } from 'gh-graphql-paginator'
+const query = `
+  query ($endCursor: String) {
+  repository(name: "github", owner: "github") {
+    issue(number: 3) {
+      id
+      comments(first: 1, after: $endCursor) {
+        nodes {
+          id
+          body
+        }
+        totalCount
+        pageInfo {
+          hasNextPage
+          endCursor
+        }
+      }
+    }
+  }
 }
 ```
 

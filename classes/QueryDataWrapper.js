@@ -41,6 +41,9 @@ export class QueryDataWrapper {
 
     if (dataWrapper.totalCountForObjToPaginate !== _.get(dataWrapper.results, dataWrapper.paginatedObjPath).nodes.length) {
       dataWrapper.errors.push('Total records paginated does not equal total count for paginated object');
+    } else {
+      _.get(dataWrapper.results, dataWrapper.paginatedObjPath).pageInfo.hasNextPage = dataWrapper.hasNextPage;
+      _.get(dataWrapper.results, dataWrapper.paginatedObjPath).pageInfo.endCursor = dataWrapper.endCursor;
     }
   }
 
